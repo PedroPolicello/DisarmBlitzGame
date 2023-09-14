@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b762a7796d94449896cd40528add32, type: 3}
+  m_Name: AnswerWord
+  m_EditorClassIdentifier: 
+  questions:
+  - questionImage: {fileID: 21300000, guid: 01a107d2c0cdd704a9b7bd265bef4543, type: 3}
+    answer: tenda
+  - questionImage: {fileID: 21300000, guid: 81b287f607ef99943a991b9df948bef6, type: 3}
+    answer: bomba
+  - questionImage: {fileID: 21300000, guid: bc129f7481632254c9b214908b23f69e, type: 3}
+    answer: ingresso
+  - questionImage: {fileID: 21300000, guid: 7234eb5bcb0a80d419f7c12fad854c2b, type: 3}
+    answer: magico

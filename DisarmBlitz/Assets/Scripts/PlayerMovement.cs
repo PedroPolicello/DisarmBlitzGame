@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Movement")]
-    [SerializeField] private int speed;
+    [SerializeField] private float speed;
     [SerializeField] private GameObject dashStun;
-    private int normalSpeed;
+    private float normalSpeed;
     private bool canDash = true;
 
     [Header("Desarms")]
@@ -82,7 +82,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void CallDash()
     {
-        StartCoroutine(Dash());
+
+        if (canDash == true)
+        {
+            StartCoroutine(Dash());
+        }
+
+
     }
 
     private void Update()
@@ -146,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Dash()
     {
         dashStun.SetActive(true);
-        speed *= 2;
+        speed *= 1.5f;
         yield return new WaitForSeconds(.4f);
         speed = normalSpeed;
         canDash = false;

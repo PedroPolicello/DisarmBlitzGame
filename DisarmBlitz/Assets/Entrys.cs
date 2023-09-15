@@ -62,6 +62,15 @@ public partial class @Entrys : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Keyboard Movement"",
+                    ""type"": ""Button"",
+                    ""id"": ""c75f8d46-d0ee-4157-b4d7-79e91b2dfc19"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -89,8 +98,30 @@ public partial class @Entrys : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""4297eff6-f739-47cc-aac0-cce473fdb965"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""47ec9045-3202-47d2-a937-17397c64d72f"",
                     ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89467954-3fc6-4a5c-862a-3db6dfb3f345"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -108,6 +139,61 @@ public partial class @Entrys : IInputActionCollection2, IDisposable
                     ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92392e5c-a416-469a-9fc4-4751d26ad8e6"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db2b3044-d183-482e-bc97-fd85a7ef0b00"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keyboard Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aec1a473-23b7-4648-bd07-0dd9358a8da5"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keyboard Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9aa468d6-89a2-4563-8e05-2d774d241db2"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keyboard Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c23e49b-c602-4a02-931a-ebcddd786884"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keyboard Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -120,6 +206,7 @@ public partial class @Entrys : IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        m_Player_KeyboardMovement = m_Player.FindAction("Keyboard Movement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +270,7 @@ public partial class @Entrys : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Use;
+    private readonly InputAction m_Player_KeyboardMovement;
     public struct PlayerActions
     {
         private @Entrys m_Wrapper;
@@ -191,6 +279,7 @@ public partial class @Entrys : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Use => m_Wrapper.m_Player_Use;
+        public InputAction @KeyboardMovement => m_Wrapper.m_Player_KeyboardMovement;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -212,6 +301,9 @@ public partial class @Entrys : IInputActionCollection2, IDisposable
                 @Use.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
                 @Use.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
                 @Use.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @KeyboardMovement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyboardMovement;
+                @KeyboardMovement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyboardMovement;
+                @KeyboardMovement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyboardMovement;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -228,6 +320,9 @@ public partial class @Entrys : IInputActionCollection2, IDisposable
                 @Use.started += instance.OnUse;
                 @Use.performed += instance.OnUse;
                 @Use.canceled += instance.OnUse;
+                @KeyboardMovement.started += instance.OnKeyboardMovement;
+                @KeyboardMovement.performed += instance.OnKeyboardMovement;
+                @KeyboardMovement.canceled += instance.OnKeyboardMovement;
             }
         }
     }
@@ -238,5 +333,6 @@ public partial class @Entrys : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+        void OnKeyboardMovement(InputAction.CallbackContext context);
     }
 }

@@ -19,5 +19,3 @@ MonoBehaviour:
     answer: bomba
   - questionImage: {fileID: 21300000, guid: bc129f7481632254c9b214908b23f69e, type: 3}
     answer: ingresso
-  - questionImage: {fileID: 21300000, guid: 7234eb5bcb0a80d419f7c12fad854c2b, type: 3}
-    answer: magico

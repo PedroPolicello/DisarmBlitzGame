@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     private float time;
     private float totalTime = 120;
+    [SerializeField] private GameObject finalScreen;
 
     void Update()
     {
@@ -24,5 +25,15 @@ public class Timer : MonoBehaviour
         string secondsString = seconds.ToString("D2");
 
         timerText.text = ("Time: " + minutesString + ":" + secondsString);
+    
+        if (remainingTime <= 0)
+        {
+            Time.timeScale = 0;
+            timerText.text = "Time: 00:00";
+            finalScreen.SetActive(true);
+
+        }
+
     }
-}
+
+}   

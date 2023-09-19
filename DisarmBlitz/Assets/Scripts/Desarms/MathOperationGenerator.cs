@@ -45,6 +45,8 @@ public class MathOperationGenerator : MonoBehaviour
             useButton.gameObject.SetActive(true);
             interactButton.gameObject.SetActive(true);
             dashButton.gameObject.SetActive(true);
+            numberSlots[3].GetComponentInChildren<TextMeshProUGUI>().text = "";
+            numberSlots[4].GetComponentInChildren<TextMeshProUGUI>().text = "";
         }
     }
 
@@ -96,11 +98,15 @@ public class MathOperationGenerator : MonoBehaviour
             useButton.gameObject.SetActive(true);
             interactButton.gameObject.SetActive(true);
             dashButton.gameObject.SetActive(true);
+            numberSlots[3].GetComponentInChildren<TextMeshProUGUI>().text = "";
+            numberSlots[4].GetComponentInChildren<TextMeshProUGUI>().text = "";
+            GenerateMathOperation();
         }
         else
         {
             playerTrys--;
             Debug.Log("Resposta incorreta! Você tem " + playerTrys + " chances!");
+            GenerateMathOperation();
         }
     }
 }

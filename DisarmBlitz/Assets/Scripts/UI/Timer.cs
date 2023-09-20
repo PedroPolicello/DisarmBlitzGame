@@ -24,12 +24,12 @@ public class Timer : MonoBehaviour
         string minutesString = minutes.ToString("D2");
         string secondsString = seconds.ToString("D2");
 
-        timerText.text = ("Time: " + minutesString + ":" + secondsString);
+        timerText.text = ("Tempo: " + minutesString + ":" + secondsString);
     
         if (remainingTime <= 0)
         {
             Time.timeScale = 0;
-            timerText.text = "Time: 00:00";
+            timerText.text = "Tempo: 00:00";
             finalScreen.SetActive(true);
 
         }

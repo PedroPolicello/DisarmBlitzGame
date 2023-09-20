@@ -58,7 +58,7 @@ public class QuizManager : MonoBehaviour
         answerWord = questionDataScriptable.questions[currentQuestionIndex].answer;
         //set the image of question
         questionImage.sprite = questionDataScriptable.questions[currentQuestionIndex].questionImage;
-            
+
         ResetQuestion();                               //reset the answers and options value to orignal     
 
         selectedWordsIndex.Clear();                     //clear the list for new question
@@ -156,7 +156,7 @@ public class QuizManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Game Complete"); //else game is complete
-                    gameComplete.SetActive(true);
+                    StartCoroutine(CallCompleteText());
                     PlayerMovement.instance.SetWordDisarm(true);
                     joystick.gameObject.SetActive(true);
                     useButton.gameObject.SetActive(true);
@@ -181,7 +181,14 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    IEnumerator CallCompleteText()
+    {
+        gameComplete.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameComplete.SetActive(false);
+    }
 }
+
 
 [System.Serializable]
 public class QuestionData
@@ -192,6 +199,6 @@ public class QuestionData
 
 public enum GameStatus
 {
-   Next,
-   Playing
+    Next,
+    Playing
 }

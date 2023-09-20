@@ -27,8 +27,8 @@ public class IATest : MonoBehaviour
 
     void SetRandomDestination()
     {
-        float x = Random.Range(-24f, 24f);
-        float z = Random.Range(-81f, -21f);
+        float x = Random.Range(-180f, 180f);
+        float z = Random.Range(-115f, 180f);
         currentDestination = new Vector3(x, transform.position.y, z);
     }
 
@@ -45,20 +45,13 @@ public class IATest : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "NumberDesarm")
-        {
-            SetRandomDestination();
-        }
-
-        else if (collision.gameObject.tag == "WordDesarm")
-        {
-            SetRandomDestination();
-        }
-
-        else if (collision.gameObject.tag == "BearTrap")
+        if (collision.gameObject.tag == "BearTrap")
         {
             StartCoroutine(BearTrap());
         }
+
+        SetRandomDestination();
+
     }
     private void OnTriggerEnter(Collider other)
     {

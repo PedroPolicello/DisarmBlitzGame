@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
@@ -24,6 +25,15 @@ public class QuizManager : MonoBehaviour
     private int currentAnswerIndex = 0, currentQuestionIndex = 0;   //index to keep track of current answer and current question
     private bool correctAnswer = true;                      //bool to decide if answer is correct or not
     private string answerWord;                              //string to store answer of current question
+
+    private bool isWordDisarmed = false;
+
+    [Header("UI")]
+    [SerializeField] private GameObject joystick;
+    [SerializeField] private GameObject useButton;
+    [SerializeField] private GameObject interactButton;
+    [SerializeField] private GameObject dashButton;
+    [SerializeField] private GameObject wordTask;
 
     private void Awake()
     {
@@ -147,6 +157,12 @@ public class QuizManager : MonoBehaviour
                 {
                     Debug.Log("Game Complete"); //else game is complete
                     gameComplete.SetActive(true);
+                    PlayerMovement.instance.SetWordDisarm(true);
+                    joystick.gameObject.SetActive(true);
+                    useButton.gameObject.SetActive(true);
+                    interactButton.gameObject.SetActive(true);
+                    dashButton.gameObject.SetActive(true);
+                    wordTask.gameObject.SetActive(false);
                 }
             }
         }

@@ -12,6 +12,7 @@ TagManager:
   - BearTrap
   - Snap
   - RandomSabotage
+  - FinalDisarm
   layers:
   - Default
   - TransparentFX

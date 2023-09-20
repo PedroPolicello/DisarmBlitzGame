@@ -26,7 +26,7 @@ public class MathOperationGenerator : MonoBehaviour
     private int result;
 
     private int playerTrys = 3;
-    private bool isDisarmed = false;
+    private bool isNumberDisarmed = false;
 
 
     void Start()
@@ -91,7 +91,7 @@ public class MathOperationGenerator : MonoBehaviour
         if (finalResult == result)
         {
             Debug.Log("Resposta correta!");
-            isDisarmed = true;
+            PlayerMovement.instance.SetNumberDisarm(true);
             numberManager.gameObject.SetActive(false);
             numberUI.gameObject.SetActive(false);
             joystick.gameObject.SetActive(true);

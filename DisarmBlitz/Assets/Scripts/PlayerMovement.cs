@@ -4,17 +4,25 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance;
+
+
     [Header("Player Movement")]
     [SerializeField] private float speed;
     [SerializeField] private GameObject dashStun;
     private float normalSpeed;
     private bool canDash = true;
 
+    [Header("Player UI")]
+    [SerializeField] private GameObject joystick;
+    [SerializeField] private GameObject useButton;
+    [SerializeField] private GameObject interactButton;
+    [SerializeField] private GameObject dashButton;
+    [SerializeField] private GameObject disarmScreen;
+
     [Header("Desarms")]
     [SerializeField] private GameObject wordDesarm;
-    [SerializeField] private GameObject wordManager;
     [SerializeField] private GameObject numberDesarm;
-    [SerializeField] private GameObject numberManager;
     [SerializeField] private GameObject blind;
     [SerializeField] private int QTE;
     private bool desarmNum;
@@ -29,8 +37,21 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 myInput;
     private Transform playerTransform;
 
+    private bool isWordDisarmed = false;
+    private bool isNumberDisarmed = false;
+
+
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
         playerTransform = GetComponent<Transform>();
         normalSpeed = speed;
     }
@@ -44,16 +65,20 @@ public class PlayerMovement : MonoBehaviour
         if (value.performed && desarmNum == true)
         {
             numberDesarm.gameObject.SetActive(true);
-            numberManager.gameObject.SetActive(true);
-            //speed = 0;
+            joystick.gameObject.SetActive(false);
+            useButton.gameObject.SetActive(false);
+            interactButton.gameObject.SetActive(false);
+            dashButton.gameObject.SetActive(false);
             desarmNum = false;
         }
 
         else if (value.performed && desarmWord == true)
         {
             wordDesarm.gameObject.SetActive(true);
-            wordManager.gameObject.SetActive(true);
-            //speed = 0;
+            joystick.gameObject.SetActive(false);
+            useButton.gameObject.SetActive(false);
+            interactButton.gameObject.SetActive(false);
+            dashButton.gameObject.SetActive(false);
             desarmWord = false;
         }
     }
@@ -75,20 +100,16 @@ public class PlayerMovement : MonoBehaviour
                 bearTrap = false;
                 escapingBearTrap = false;
                 speed = normalSpeed;
-                //bearTrapPrefab.Destroy(bearTrapPrefab);
             }
         }
     }
 
     public void CallDash()
     {
-
         if (canDash == true)
         {
             StartCoroutine(Dash());
         }
-
-
     }
 
     private void Update()
@@ -128,6 +149,12 @@ public class PlayerMovement : MonoBehaviour
         else if (collision.gameObject.tag == "HoneySlow")
         {
             speed = normalSpeed / 2;
+        }
+
+        else if(collision.gameObject.CompareTag("FinalDisarm") && isWordDisarmed && isNumberDisarmed)
+        {
+            print("Bomb Disarmed");
+            disarmScreen.gameObject.SetActive(true);
         }
     }
 
@@ -183,4 +210,16 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(DashStun());
         }
     }
+
+
+    public void SetNumberDisarm(bool isDisarmed)
+    {
+        isNumberDisarmed = isDisarmed;
+    }
+
+    public void SetWordDisarm(bool isDisarmed)
+    {
+        isWordDisarmed = isDisarmed;
+    }
+
 }

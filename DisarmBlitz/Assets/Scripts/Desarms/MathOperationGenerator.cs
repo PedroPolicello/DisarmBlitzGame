@@ -18,6 +18,7 @@ public class MathOperationGenerator : MonoBehaviour
     [SerializeField] private GameObject interactButton;
     [SerializeField] private GameObject dashButton;
     [SerializeField] private GameObject numberUI;
+    [SerializeField] private GameObject gameComplete;
 
     public GameObject[] numberSlots; 
 
@@ -92,12 +93,12 @@ public class MathOperationGenerator : MonoBehaviour
         {
             Debug.Log("Resposta correta!");
             PlayerMovement.instance.SetNumberDisarm(true);
-            numberManager.gameObject.SetActive(false);
             numberUI.gameObject.SetActive(false);
             joystick.gameObject.SetActive(true);
             useButton.gameObject.SetActive(true);
             interactButton.gameObject.SetActive(true);
             dashButton.gameObject.SetActive(true);
+            StartCoroutine(CallCompleteText());
             numberSlots[3].GetComponentInChildren<TextMeshProUGUI>().text = "";
             numberSlots[4].GetComponentInChildren<TextMeshProUGUI>().text = "";
             GenerateMathOperation();
@@ -108,5 +109,12 @@ public class MathOperationGenerator : MonoBehaviour
             Debug.Log("Resposta incorreta! Você tem " + playerTrys + " chances!");
             GenerateMathOperation();
         }
+    }
+
+    IEnumerator CallCompleteText()
+    {
+        gameComplete.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameComplete.SetActive(false);
     }
 }

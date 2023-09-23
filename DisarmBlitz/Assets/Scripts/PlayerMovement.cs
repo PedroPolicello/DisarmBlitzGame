@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Interact(InputAction.CallbackContext value)
     {
-        if (value.performed && desarmNum == true)
+        if (value.performed && desarmNum == true && isNumberDisarmed==false)
         {
             numberDesarm.gameObject.SetActive(true);
             joystick.gameObject.SetActive(false);
@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
             desarmNum = false;
         }
 
-        else if (value.performed && desarmWord == true)
+        else if (value.performed && desarmWord == true && isWordDisarmed==false)
         {
             wordDesarm.gameObject.SetActive(true);
             joystick.gameObject.SetActive(false);

@@ -20,7 +20,7 @@ public class MathOperationGenerator : MonoBehaviour
     [SerializeField] private GameObject numberUI;
     [SerializeField] private GameObject gameComplete;
 
-    public GameObject[] numberSlots; 
+    public GameObject[] numberSlots;
 
     private int operand1;
     private int operand2;
@@ -28,6 +28,7 @@ public class MathOperationGenerator : MonoBehaviour
 
     private int playerTrys = 3;
     private bool isNumberDisarmed = false;
+    private int mathCount = 0;
 
 
     void Start()
@@ -38,7 +39,7 @@ public class MathOperationGenerator : MonoBehaviour
 
     void Update()
     {
-        if(playerTrys <= 0)
+        if (playerTrys <= 0)
         {
             numberManager.gameObject.SetActive(false);
             numberUI.gameObject.SetActive(false);
@@ -89,9 +90,8 @@ public class MathOperationGenerator : MonoBehaviour
         string playerResult = numberSlots[3].GetComponentInChildren<TextMeshProUGUI>().text + numberSlots[4].GetComponentInChildren<TextMeshProUGUI>().text;
         int finalResult = int.Parse(playerResult);
 
-        if (finalResult == result)
+        if (finalResult == result && mathCount >= 2)
         {
-            Debug.Log("Resposta correta!");
             PlayerMovement.instance.SetNumberDisarm(true);
             numberUI.gameObject.SetActive(false);
             joystick.gameObject.SetActive(true);
@@ -99,9 +99,13 @@ public class MathOperationGenerator : MonoBehaviour
             interactButton.gameObject.SetActive(true);
             dashButton.gameObject.SetActive(true);
             StartCoroutine(CallCompleteText());
-            numberSlots[3].GetComponentInChildren<TextMeshProUGUI>().text = "";
-            numberSlots[4].GetComponentInChildren<TextMeshProUGUI>().text = "";
+            //numberSlots[3].GetComponentInChildren<TextMeshProUGUI>().text = "";
+            //numberSlots[4].GetComponentInChildren<TextMeshProUGUI>().text = "";
+        }
+        else if (finalResult == result)
+        {
             GenerateMathOperation();
+            mathCount++;
         }
         else
         {

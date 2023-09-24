@@ -30,6 +30,12 @@ public class MathOperationGenerator : MonoBehaviour
     private bool isNumberDisarmed = false;
     private int mathCount = 0;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     void Start()
     {
@@ -92,6 +98,7 @@ public class MathOperationGenerator : MonoBehaviour
 
         if (finalResult == result && mathCount >= 2)
         {
+            audioManager.PlaySFX(audioManager.completeDisarm);
             PlayerMovement.instance.SetNumberDisarm(true);
             numberUI.gameObject.SetActive(false);
             joystick.gameObject.SetActive(true);
@@ -99,8 +106,6 @@ public class MathOperationGenerator : MonoBehaviour
             interactButton.gameObject.SetActive(true);
             dashButton.gameObject.SetActive(true);
             StartCoroutine(CallCompleteText());
-            //numberSlots[3].GetComponentInChildren<TextMeshProUGUI>().text = "";
-            //numberSlots[4].GetComponentInChildren<TextMeshProUGUI>().text = "";
         }
         else if (finalResult == result)
         {

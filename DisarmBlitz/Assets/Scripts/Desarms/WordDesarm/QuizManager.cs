@@ -35,12 +35,15 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private GameObject dashButton;
     [SerializeField] private GameObject wordTask;
 
+    AudioManager audioManager;
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Destroy(this.gameObject);
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     // Start is called before the first frame update
@@ -163,6 +166,7 @@ public class QuizManager : MonoBehaviour
                     interactButton.gameObject.SetActive(true);
                     dashButton.gameObject.SetActive(true);
                     wordTask.gameObject.SetActive(false);
+                    audioManager.PlaySFX(audioManager.completeDisarm);
                 }
             }
         }

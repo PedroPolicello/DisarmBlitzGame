@@ -230,10 +230,10 @@ public class PlayerMovement : MonoBehaviour
     {
         audioManager.PlaySFX(audioManager.dash);
         dashStun.SetActive(true);
-        speed *= 1.4f;
+        canDash = false;
+        speed *= 2f;
         yield return new WaitForSeconds(.6f);
         speed = normalSpeed;
-        canDash = false;
         dashStun.SetActive(false);
         yield return new WaitForSeconds(5f);
         canDash = true;

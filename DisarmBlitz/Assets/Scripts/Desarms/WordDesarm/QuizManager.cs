@@ -11,7 +11,9 @@ public class QuizManager : MonoBehaviour
     public static QuizManager instance; //Instance to make is available in other scripts without reference
 
     [SerializeField] private GameObject gameComplete;
+
     //Scriptable data which store our questions data
+
     [SerializeField] private QuizDataScriptable questionDataScriptable;
     [SerializeField] private Image questionImage;           //image element to show the image
     [SerializeField] private WordData[] answerWordList;     //list of answers word in the game

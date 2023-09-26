@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip steps;
     public AudioClip slow;
     public AudioClip disarmBegin;
+    public AudioClip button;
 
     private void Start()
     {
@@ -44,4 +45,8 @@ public class AudioManager : MonoBehaviour
         musicSource.Stop();
     }
 
+    public void PlayButton()
+    {
+        PlaySFX(button);
+    }
 }

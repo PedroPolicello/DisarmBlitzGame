@@ -44,11 +44,11 @@
                 {
                     "name": "Keyboard Movement",
                     "type": "Button",
-                    "id": "c75f8d46-d0ee-4157-b4d7-79e91b2dfc19",
+                    "id": "9681e227-96da-4430-9c0b-3bd73ffb56e2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -131,19 +131,8 @@
                 },
                 {
                     "name": "",
-                    "id": "db2b3044-d183-482e-bc97-fd85a7ef0b00",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Keyboard Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aec1a473-23b7-4648-bd07-0dd9358a8da5",
-                    "path": "<Keyboard>/a",
+                    "id": "1c23e49b-c602-4a02-931a-ebcddd786884",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -164,8 +153,19 @@
                 },
                 {
                     "name": "",
-                    "id": "1c23e49b-c602-4a02-931a-ebcddd786884",
-                    "path": "<Keyboard>/d",
+                    "id": "aec1a473-23b7-4648-bd07-0dd9358a8da5",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Keyboard Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db2b3044-d183-482e-bc97-fd85a7ef0b00",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

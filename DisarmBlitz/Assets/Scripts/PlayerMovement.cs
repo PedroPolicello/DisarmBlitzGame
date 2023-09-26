@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -44,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     AudioManager audioManager;
     [SerializeField] private GameObject timer;
 
+
     void Awake()
     {
         if (instance == null)
@@ -61,15 +63,12 @@ public class PlayerMovement : MonoBehaviour
 
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         audioManager.PlaySFX(audioManager.startGame);
-
     }
 
 
     public void HandleInput(InputAction.CallbackContext value)
     {
         myInput = value.ReadValue<Vector2>();
-        //audioManager.PlaySFX(audioManager.steps);
-
     }
 
     public void Interact(InputAction.CallbackContext value)
@@ -151,6 +150,11 @@ public class PlayerMovement : MonoBehaviour
 
         // Apply the desired velocity to the Rigidbody
         rigidBody.velocity = new Vector3(desiredVelocity.x, rigidBody.velocity.y, desiredVelocity.z);
+    }
+
+    private void StepSound()
+    {
+        audioManager.PlaySFX(audioManager.steps);
     }
 
     //DESARMS
@@ -262,7 +266,6 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(DashStun());
         }
     }
-
 
     public void SetNumberDisarm(bool isDisarmed)
     {

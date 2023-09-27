@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7003851324121554660}
   - component: {fileID: -6638759814118215014}
   m_Layer: 0
-  m_Name: BearTrap
+  m_Name: Armadilha de Urso
   m_TagString: BearTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 7846482587088438395}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 11.500001, y: -2.7399998, z: -58.4}
-  m_LocalScale: {x: 3, y: 0.1, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.030000001, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -127,4 +127,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d709bb88c671444c888906e3280ad23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secForDestroy: 5
+  secForDestroy: 7

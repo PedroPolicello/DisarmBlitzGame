@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5916521076244267033}
   - component: {fileID: 1203418393438440048}
   m_Layer: 0
-  m_Name: HoneySlow
+  m_Name: Mel Viscoso
   m_TagString: HoneySlow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 1402438897420587268}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.1, y: -2.7399998, z: -50.04}
-  m_LocalScale: {x: 3, y: 0.1, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.03, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d709bb88c671444c888906e3280ad23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secForDestroy: 5
+  secForDestroy: 7
 --- !u!54 &1203418393438440048
 Rigidbody:
   m_ObjectHideFlags: 0

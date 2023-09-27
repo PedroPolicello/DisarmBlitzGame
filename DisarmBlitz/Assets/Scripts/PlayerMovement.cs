@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Movement")]
     [SerializeField] private float speed;
     [SerializeField] private GameObject dashStun;
+    [SerializeField] private Rigidbody rigidBody;
+    private float maxCollisionSpeed = 13.70f;
     private float normalSpeed;
     private bool canDash = true;
 
@@ -42,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     AudioManager audioManager;
     [SerializeField] private GameObject timer;
 
+
     void Awake()
     {
         if (instance == null)
@@ -54,19 +58,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         playerTransform = GetComponent<Transform>();
+        rigidBody = GetComponent<Rigidbody>();
         normalSpeed = speed;
 
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         audioManager.PlaySFX(audioManager.startGame);
-
     }
 
 
-    public void Input(InputAction.CallbackContext value)
+    public void HandleInput(InputAction.CallbackContext value)
     {
         myInput = value.ReadValue<Vector2>();
-        //audioManager.PlaySFX(audioManager.steps);
-
     }
 
     public void Interact(InputAction.CallbackContext value)
@@ -131,7 +133,28 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        playerTransform.Translate(new Vector3(myInput.x, 0, myInput.y) * speed * Time.deltaTime);
+        // Get input from the gamepad
+        Vector3 gamepadInput = new Vector3(myInput.x, 0, myInput.y);
+
+        // Get input from the keyboard
+        Vector3 keyboardInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+        // Combine the inputs to determine the movement direction
+        Vector3 movementInput = gamepadInput + keyboardInput;
+
+        // Normalize the input to ensure consistent speed in all directions
+        movementInput = movementInput.normalized;
+
+        // Calculate the desired velocity
+        Vector3 desiredVelocity = movementInput * speed;
+
+        // Apply the desired velocity to the Rigidbody
+        rigidBody.velocity = new Vector3(desiredVelocity.x, rigidBody.velocity.y, desiredVelocity.z);
+    }
+
+    private void StepSound()
+    {
+        audioManager.PlaySFX(audioManager.steps);
     }
 
     //DESARMS
@@ -175,6 +198,18 @@ public class PlayerMovement : MonoBehaviour
             audioManager.PlaySFX(audioManager.winGame);
             timer.gameObject.SetActive(false);
         }
+
+        // Verifique se a velocidade é maior que o limite.
+        if (rigidBody.velocity.magnitude > maxCollisionSpeed)
+        {
+            // Calcule a força contrária necessária para reduzir a velocidade.
+            Vector3 oppositeForce = -rigidBody.velocity.normalized * (rigidBody.velocity.magnitude - maxCollisionSpeed);
+
+            // Aplique a força contrária ao Rigidbody do personagem.
+            rigidBody.AddForce(oppositeForce, ForceMode.VelocityChange);
+        }
+
+
     }
 
     private void OnCollisionExit(Collision collision)
@@ -199,10 +234,10 @@ public class PlayerMovement : MonoBehaviour
     {
         audioManager.PlaySFX(audioManager.dash);
         dashStun.SetActive(true);
-        speed *= 1.5f;
-        yield return new WaitForSeconds(.4f);
-        speed = normalSpeed;
         canDash = false;
+        speed *= 2f;
+        yield return new WaitForSeconds(.6f);
+        speed = normalSpeed;
         dashStun.SetActive(false);
         yield return new WaitForSeconds(5f);
         canDash = true;
@@ -231,7 +266,6 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(DashStun());
         }
     }
-
 
     public void SetNumberDisarm(bool isDisarmed)
     {

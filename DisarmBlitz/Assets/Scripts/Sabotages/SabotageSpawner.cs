@@ -29,7 +29,6 @@ public class SabotageSpawner : MonoBehaviour
             SpawnObject(currentObject);
             objectChosen = false;
             backgroundText.gameObject.SetActive(false);
-
         }
     }
 
